@@ -1,0 +1,24 @@
+spring:
+  profiles:
+    active: mysql
+  batch:
+    job:
+      names: ${job.name:NONE} # Spring Batch가 실행될 때, Program arguments로 job.name 값이 넘어오면 해당 값과 일치하는 job만 실행하고, 없으면 어떤 배치도 할당하지 않음(NONE)
+---
+spring:
+  profiles: local
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+---
+spring:
+  profiles: mysql
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/new_schema # 커넥션 이름이 아닌 DB 스키마 이름
+      username: root
+      password: password
+      driver-class-name: com.mysql.jdbc.Driver
