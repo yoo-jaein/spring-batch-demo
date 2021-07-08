@@ -1,9 +1,17 @@
 spring:
   profiles:
     active: mysql
+
   batch:
     job:
       names: ${job.name:NONE} # Spring Batch가 실행될 때, Program arguments로 job.name 값이 넘어오면 해당 값과 일치하는 job만 실행하고, 없으면 어떤 배치도 할당하지 않음(NONE)
+      #enabled: false # CommandLineRunner 설정 해제
+
+logging:
+  level:
+    org:
+      springframework:
+        batch: DEBUG
 ---
 spring:
   profiles: local
@@ -21,4 +29,4 @@ spring:
       jdbc-url: jdbc:mysql://localhost:3306/new_schema # 커넥션 이름이 아닌 DB 스키마 이름
       username: root
       password: password
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver # com.mysql.jdbc.Driver
